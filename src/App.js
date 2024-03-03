@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import List from "./components/List";
+import Details from "./components/Details";
 
-function App() {
+export default function App() {
+  const url = "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/hooks-context/use-effect/data/";
+  const [currentId, setCurrentId] = useState();
+
+  const handleClick = (id) => {
+    setCurrentId(id);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment key="app-fragment">
+      <List url={url} onClickItem={handleClick} />
+      {currentId && <Details url={url} dataId={currentId} />}
+    </React.Fragment>
   );
 }
-
-export default App;
